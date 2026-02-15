@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: geo-ai-bot
+    env: docker
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
+    envVars:
+      - key: DB_URL
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASS
+        sync: false
+      - key: BOT_TOKEN
+        sync: false
+      - key: BOT_USERNAME
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: ADMIN_USER
+        sync: false
+      - key: ADMIN_PASS
+        sync: false

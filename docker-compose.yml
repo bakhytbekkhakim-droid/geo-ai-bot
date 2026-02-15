@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+
+  app:
+    build: .
+    ports:
+      - "10000:10000"
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/geodb
+      DB_USER: geo
+      DB_PASS: geo
+      BOT_TOKEN: your_token
+      BOT_USERNAME: your_username
+      GEMINI_API_KEY: your_key
+      ADMIN_USER: admin
+      ADMIN_PASS: admin
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: geodb
+      POSTGRES_USER: geo
+      POSTGRES_PASSWORD: geo
+    ports:
+      - "5432:5432"
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
